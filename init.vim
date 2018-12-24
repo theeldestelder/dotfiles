@@ -15,21 +15,17 @@ if dein#load_state('$HOME/.config/nvim')
     call dein#add('$HOME/.config/nvim/repos/github.com/Shougo/dein.vim')
 
     " Editing stuff
-    call dein#add('tpope/vim-fugitive')  " Git wrapper
+    call dein#add('tpope/vim-fugitive')      " Git wrapper
     call dein#add('tpope/vim-surround')
     call dein#add('tpope/vim-repeat')
-    call dein#add('tpope/vim-commentary') " comment individual lines or blocks of lines
+    call dein#add('tpope/vim-commentary')    " comment individual lines or blocks of lines
 
     call dein#add('Shougo/deoplete.nvim')
     call dein#add('vim-scripts/a.vim')
-    call dein#add('Yggdroot/indentLine')
     call dein#add('jiangmiao/auto-pairs')
 
-    call dein#add('donRaphaco/neotex', { 'for': 'tex' }) " Live LaTeX preview
-
-    " call dein#add('rakr/vim-one')
-    " call dein#add('justinmk/vim-syntax-extra')
-    " call dein#add('arakashic/chromatica.nvim')
+    " Motion stuff
+    call dein#add('bkad/CamelCaseMotion')
 
     " Syntax highlighting
     call dein#add('octol/vim-cpp-enhanced-highlight')
@@ -39,10 +35,9 @@ if dein#load_state('$HOME/.config/nvim')
     " Visual stuff
     call dein#add('vim-airline/vim-airline')
     call dein#add('rafi/awesome-vim-colorschemes')
+    call dein#add('Yggdroot/indentLine')
 
-
-    " You can specify revision/branch/tag.
-    " call dein#add('Shougo/deol.nvim', { 'rev': '01203d4c9' })
+    call dein#add('donRaphaco/neotex', { 'for': 'tex' }) " Live LaTeX preview
 
     " Required:
     call dein#end()
@@ -60,50 +55,21 @@ endif
 
 "End dein Scripts-------------------------
 
-" -------- Plugin Settings ---------
-
-" NeoTex settings
-" Compile current buffer: :NeoTex
-" Turn on NeoTex for current buffer: :NeoTexOn
-let g:tex_flavor = 'latex'
-
-" deoplete settings
-let g:deoplete#enable_at_startup = 1
-
-" Enhanced cpp highlighting settings
-let g:cpp_class_scope_highlight = 1
-let g:cpp_member_variable_highlight = 1
-let g:cpp_class_decl_highlight = 1
-let g:cpp_experimental_simple_template_highlight = 1
-let g:cpp_concepts_highlight = 1
-
-" Chromatica settings
-"let g:chromatica#enable_at_startup=1
-"let g:chromatica#responsive_mode=1 " Chromatica highlight even in insert mode
-"let g:chromatica#libclang_path='/usr/lib/x86_64-linux-gnu/libclang-6.0.so.1'
-
-" python syntax highlighting settings
-let g:python_highlight_all = 1
-
-set number relativenumber
-set splitbelow "open horizontal split on bottom
-set splitright "open vertical split on right
-
-set tabstop=4 " show existing tab with 4 spaces width
-set shiftwidth=4 " when indenting with '>', use 4 spaces width
-set expandtab " On pressing tab, insert 4 spaces
-
-set scrolloff=2 " keep 2 lines visible while scrolling
-
-" Set Airline theme
-"let g:airline_theme='molokayo'
-
 
 " --------- General Settings ---------
 
-colorscheme dracula
-"set background=dark " dark version
+set number relativenumber
+set splitbelow " open horizontal split on bottom
+set splitright " open vertical split on right
 
+set tabstop=4       " show existing tab with 4 spaces width
+set shiftwidth=4    " when indenting with '>', use 4 spaces width
+set expandtab       " insert spaces when pressing tab
+set scrolloff=2     " keep 2 lines visible while scrolling
+
+let mapleader = ","
+
+colorscheme dracula
 
 if (empty($TMUX))
     if (has("nvim"))
@@ -117,3 +83,28 @@ if (empty($TMUX))
         set termguicolors
     endif
 endif
+
+
+" -------- Plugin Settings ---------
+
+" deoplete settings
+let g:deoplete#enable_at_startup = 1
+
+" Enhanced cpp highlighting settings
+let g:cpp_class_scope_highlight = 1
+let g:cpp_member_variable_highlight = 1
+let g:cpp_class_decl_highlight = 1
+let g:cpp_experimental_simple_template_highlight = 1
+let g:cpp_concepts_highlight = 1
+
+" python syntax highlighting settings
+let g:python_highlight_all = 1
+
+" CamelCaseMotion settings
+call camelcasemotion#CreateMotionMappings('<leader>') " use default mappings
+
+" NeoTex settings
+" Compile current buffer: :NeoTex
+" Turn on NeoTex for current buffer: :NeoTexOn
+let g:tex_flavor = 'latex'
+
