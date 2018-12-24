@@ -15,4 +15,4 @@ Change into the repository directory:
 
 Run the install script:
 
-    sh install.sh
+    ./install.sh
