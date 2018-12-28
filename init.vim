@@ -27,14 +27,18 @@ if dein#load_state('$HOME/.config/nvim')
     " Motion stuff
     call dein#add('bkad/CamelCaseMotion')
 
+    " Searching
+    call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0 }) 
+    call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })
+
     " Syntax highlighting
     call dein#add('octol/vim-cpp-enhanced-highlight')
     call dein#add('pangloss/vim-javascript')
     call dein#add('vim-python/python-syntax')
+    call dein#add('rafi/awesome-vim-colorschemes')
 
     " Visual stuff
     call dein#add('vim-airline/vim-airline')
-    call dein#add('rafi/awesome-vim-colorschemes')
     call dein#add('Yggdroot/indentLine')
 
     call dein#add('donRaphaco/neotex', { 'for': 'tex' }) " Live LaTeX preview
