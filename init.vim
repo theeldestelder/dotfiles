@@ -24,6 +24,9 @@ if dein#load_state('$HOME/.config/nvim')
     call dein#add('vim-scripts/a.vim')
     call dein#add('jiangmiao/auto-pairs')
 
+
+    call dein#add('sophacles/vim-processing') " support for Processing language
+
     " Motion stuff
     call dein#add('bkad/CamelCaseMotion')
 
