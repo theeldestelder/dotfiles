@@ -42,7 +42,8 @@ if dein#load_state('$HOME/.config/nvim')
 
     " Visual stuff
     call dein#add('vim-airline/vim-airline')
-    call dein#add('Yggdroot/indentLine')
+    "call dein#add('Yggdroot/indentLine')
+    call dein#add('nathanaelkane/vim-indent-guides')
 
     call dein#add('donRaphaco/neotex', { 'for': 'tex' }) " Live LaTeX preview
 
@@ -73,6 +74,10 @@ set tabstop=4       " show existing tab with 4 spaces width
 set shiftwidth=4    " when indenting with '>', use 4 spaces width
 set expandtab       " insert spaces when pressing tab
 set scrolloff=2     " keep 2 lines visible while scrolling
+
+set smartcase       " if search pattern is all lowercase, find all matches.
+                    " if pattern contains upperase, find only matches with
+                    " uppercase
 
 let mapleader = ","
 
@@ -115,3 +120,7 @@ call camelcasemotion#CreateMotionMappings('<leader>') " use default mappings
 " Turn on NeoTex for current buffer: :NeoTexOn
 let g:tex_flavor = 'latex'
 
+" Indent Guides settings
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_guide_size = 1
+let g:indent_guides_start_level = 2
