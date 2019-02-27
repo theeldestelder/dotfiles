@@ -39,6 +39,7 @@ if dein#load_state('$HOME/.config/nvim')
     call dein#add('pangloss/vim-javascript')
     call dein#add('vim-python/python-syntax')
     call dein#add('rafi/awesome-vim-colorschemes')
+    call dein#add('leshill/vim-json')
 
     " Visual stuff
     call dein#add('vim-airline/vim-airline')
