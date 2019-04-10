@@ -100,6 +100,8 @@ endif
 " Remove all trailing whitespace by pressing F5
 nnoremap <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
 
+nnoremap <silent> <Leader>n :noh<CR>
+
 
 " Open files in vertical horizontal split
 nnoremap <silent> <Leader>v :call fzf#run({
