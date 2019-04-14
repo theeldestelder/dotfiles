@@ -4,9 +4,11 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'tpope/vim-repeat'
     Plug 'tpope/vim-commentary'    " comment individual lines or blocks of lines
 
-    Plug 'Shougo/deoplete.nvim'
+    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
     Plug 'vim-scripts/a.vim'
     Plug 'jiangmiao/auto-pairs'
+
+    Plug 'junegunn/vim-easy-align'
 
     Plug 'sophacles/vim-processing' " support for Processing language
 
@@ -14,8 +16,8 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'bkad/CamelCaseMotion'
 
     " Searching
-    Plug 'junegunn/fzf', { 'build': './install --all', 'merged': 0 }
-    Plug 'junegunn/fzf.vim', { 'depends': 'fzf' }
+    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+    Plug 'junegunn/fzf.vim'
 
     " Syntax highlighting
     Plug 'octol/vim-cpp-enhanced-highlight'
@@ -26,8 +28,8 @@ call plug#begin('~/.local/share/nvim/plugged')
 
     " Visual stuff
     Plug 'vim-airline/vim-airline'
-    "call dein#add('Yggdroot/indentLine')
-    Plug 'nathanaelkane/vim-indent-guides'
+    Plug 'Yggdroot/indentLine'
+    "Plug 'nathanaelkane/vim-indent-guides'
 
     "Plug 'donRaphaco/neotex', { 'for': 'tex' }) " Live LaTeX preview
 
@@ -70,16 +72,17 @@ if (empty($TMUX))
 endif
 
 " Remove all trailing whitespace by pressing F5
-nnoremap <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
+" nnoremap <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
+
 
 " Remove leftover highlighting
 nnoremap <silent> <Leader>n :noh<CR>
 
 
 " Open files in vertical horizontal split
-nnoremap <silent> <Leader>v :call fzf#run({
-\   'right': winwidth('.') / 2,
-\   'sink':  'vertical botright split' })<CR>
+" nnoremap <silent> <Leader>v :call fzf#run({
+" \   'right': winwidth('.') / 2,
+" \   'sink':  'vertical botright split' })<CR>
 
 
 " -------- Plugin Settings ---------
@@ -101,19 +104,57 @@ let g:python_highlight_all = 1
 call camelcasemotion#CreateMotionMappings('<leader>') " use default mappings
 
 " Indent Guides settings
-let g:indent_guides_enable_on_vim_startup = 1
-let g:indent_guides_guide_size = 1
-let g:indent_guides_start_level = 2
+" let g:indent_guides_enable_on_vim_startup = 1
+" let g:indent_guides_guide_size = 1
+" let g:indent_guides_start_level = 2
+
+" indentLine
+let g:indentLine_char = '▏'
+let g:indentLine_color_gui = '#363949'
+
+
+
+
+" Trim Whitespaces
+function! TrimWhitespace()
+    let l:save = winsaveview()
+    %s/\\\@<!\s\+$//e
+    call winrestview(l:save)
+endfunction
+
+nmap <leader>t :call TrimWhitespace()<CR>
+
 
 
 
 " ---------- FZF stuff ------------
 
-function! s:find_git_root()
-  return system('git rev-parse --show-toplevel 2> /dev/null')[:-2]
-endfunction
+" function! s:find_git_root()
+"   return system('git rev-parse --show-toplevel 2> /dev/null')[:-2]
+" endfunction
 
-command! ProjectFiles execute 'Files' s:find_git_root()
+" command! ProjectFiles execute 'Files' s:find_git_root()
 
-noremap <leader>f :ProjectFiles<cr>
+" noremap <leader>f :ProjectFiles<cr>
 
+nmap <leader>f :Files<CR>
+
+" fzf-vim
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-s': 'split',
+  \ 'ctrl-v': 'vsplit' }
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'Type'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'Character'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+\ 'header': ['fg', 'Comment'] }
