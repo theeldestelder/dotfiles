@@ -138,6 +138,7 @@ nmap <leader>t :call TrimWhitespace()<CR>
 " noremap <leader>f :ProjectFiles<cr>
 
 nmap <leader>f :Files<CR>
+nmap <leader>l :Lines<CR>
 
 " fzf-vim
 let g:fzf_action = {
