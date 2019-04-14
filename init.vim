@@ -1,69 +1,41 @@
-"dein Scripts-----------------------------
-if &compatible
-    set nocompatible               " Be iMproved
-endif
+call plug#begin('~/.local/share/nvim/plugged')
+    Plug 'tpope/vim-fugitive'      " Git wrapper
+    Plug 'tpope/vim-surround'
+    Plug 'tpope/vim-repeat'
+    Plug 'tpope/vim-commentary'    " comment individual lines or blocks of lines
 
-" Required:
-set runtimepath+=$HOME/.config/nvim/repos/github.com/Shougo/dein.vim
+    Plug 'Shougo/deoplete.nvim'
+    Plug 'vim-scripts/a.vim'
+    Plug 'jiangmiao/auto-pairs'
 
-" Required:
-if dein#load_state('$HOME/.config/nvim')
-    call dein#begin('$HOME/.config/nvim')
-
-    " Let dein manage dein
-    " Required:
-    call dein#add('$HOME/.config/nvim/repos/github.com/Shougo/dein.vim')
-
-    " Editing stuff
-    call dein#add('tpope/vim-fugitive')      " Git wrapper
-    call dein#add('tpope/vim-surround')
-    call dein#add('tpope/vim-repeat')
-    call dein#add('tpope/vim-commentary')    " comment individual lines or blocks of lines
-
-    call dein#add('Shougo/deoplete.nvim')
-    call dein#add('vim-scripts/a.vim')
-    call dein#add('jiangmiao/auto-pairs')
-
-
-    call dein#add('sophacles/vim-processing') " support for Processing language
+    Plug 'sophacles/vim-processing' " support for Processing language
 
     " Motion stuff
-    call dein#add('bkad/CamelCaseMotion')
+    Plug 'bkad/CamelCaseMotion'
 
     " Searching
-    call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0 })
-    call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })
+    Plug 'junegunn/fzf', { 'build': './install --all', 'merged': 0 }
+    Plug 'junegunn/fzf.vim', { 'depends': 'fzf' }
 
     " Syntax highlighting
-    call dein#add('octol/vim-cpp-enhanced-highlight')
-    call dein#add('pangloss/vim-javascript')
-    call dein#add('vim-python/python-syntax')
-    call dein#add('rafi/awesome-vim-colorschemes')
-    call dein#add('leshill/vim-json')
+    Plug 'octol/vim-cpp-enhanced-highlight'
+    Plug 'pangloss/vim-javascript'
+    Plug 'vim-python/python-syntax'
+    Plug 'rafi/awesome-vim-colorschemes'
+    Plug 'leshill/vim-json'
 
     " Visual stuff
-    call dein#add('vim-airline/vim-airline')
+    Plug 'vim-airline/vim-airline'
     "call dein#add('Yggdroot/indentLine')
-    call dein#add('nathanaelkane/vim-indent-guides')
+    Plug 'nathanaelkane/vim-indent-guides'
 
-    call dein#add('donRaphaco/neotex', { 'for': 'tex' }) " Live LaTeX preview
+    "Plug 'donRaphaco/neotex', { 'for': 'tex' }) " Live LaTeX preview
 
-    " Required:
-    call dein#end()
-    call dein#save_state()
-endif
+" Initialize plugin system
+call plug#end()
 
-" Required:
 filetype plugin indent on
 syntax on
-
-" If you want to install not installed plugins on startup.
-if dein#check_install()
-    call dein#install()
-endif
-
-"End dein Scripts-------------------------
-
 
 " --------- General Settings ---------
 
@@ -100,6 +72,7 @@ endif
 " Remove all trailing whitespace by pressing F5
 nnoremap <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
 
+" Remove leftover highlighting
 nnoremap <silent> <Leader>n :noh<CR>
 
 
@@ -126,11 +99,6 @@ let g:python_highlight_all = 1
 
 " CamelCaseMotion settings
 call camelcasemotion#CreateMotionMappings('<leader>') " use default mappings
-
-" NeoTex settings
-" Compile current buffer: :NeoTex
-" Turn on NeoTex for current buffer: :NeoTexOn
-let g:tex_flavor = 'latex'
 
 " Indent Guides settings
 let g:indent_guides_enable_on_vim_startup = 1

@@ -1,5 +1,9 @@
 # Dotfiles
 
+These are my dotfiles.  They make me happier.
+
+I use zsh as my shell and NeoVim as my text editor.
+
 ### Contents
 - `init.vim` - Neovim settings
 - `install.sh` - installer script to create appropriate symlinks
@@ -18,9 +22,21 @@ Run the install script:
 
     ./install.sh
 
-### Installing Dein
-Dein will install to `$HOME/.config/nvim` by default
+## Symlinks you're gonna need
 
-Run the setup script:
+You're gonna need to make sure these directories exist too.
 
-    ./setup.sh
+- custom zsh theme
+```
+ln -s ~/dotfiles/ozzy.zsh-theme ~/.oh-my-zsh/custom/themes/ozzy.zsh-theme
+```
+
+- .zshrc
+```
+ln -s ~/dotfiles/.zshrc ~/.zshrc
+```
+
+- init.vim
+```
+ln -s ~/dotfiles/.init.vim ~/.config/nvim/init.vim
+```
