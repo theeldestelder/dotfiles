@@ -112,6 +112,11 @@ call camelcasemotion#CreateMotionMappings('<leader>') " use default mappings
 let g:indentLine_char = '▏'
 let g:indentLine_color_gui = '#363949'
 
+" Easy align
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
 
 
 
