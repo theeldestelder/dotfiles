@@ -25,6 +25,8 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'vim-python/python-syntax'
     Plug 'rafi/awesome-vim-colorschemes'
     Plug 'leshill/vim-json'
+    Plug 'PProvost/vim-ps1'
+
 
     " Visual stuff
     Plug 'vim-airline/vim-airline'
