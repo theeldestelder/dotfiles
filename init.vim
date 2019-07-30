@@ -2,7 +2,7 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'tpope/vim-fugitive'      " Git wrapper
     Plug 'tpope/vim-surround'
     Plug 'tpope/vim-repeat'
-    Plug 'tpope/vim-commentary'    " comment individual lines or blocks of lines
+    Plug 'tomtom/tcomment_vim'
 
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
     Plug 'vim-scripts/a.vim'
@@ -10,7 +10,10 @@ call plug#begin('~/.local/share/nvim/plugged')
 
     Plug 'junegunn/vim-easy-align'
 
-    Plug 'sophacles/vim-processing' " support for Processing language
+    Plug 'tmux-plugins/vim-tmux-focus-events'
+
+
+    Plug 'vim-scripts/a.vim' " switch between source files and header files quick
 
     " Motion stuff
     Plug 'bkad/CamelCaseMotion'
@@ -20,20 +23,18 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'junegunn/fzf.vim'
 
     " Syntax highlighting
-    Plug 'octol/vim-cpp-enhanced-highlight'
+    Plug 'bfrg/vim-cpp-modern'
     Plug 'pangloss/vim-javascript'
     Plug 'vim-python/python-syntax'
-    Plug 'rafi/awesome-vim-colorschemes'
     Plug 'leshill/vim-json'
     Plug 'PProvost/vim-ps1'
-
+    Plug 'posva/vim-vue'
+    Plug 'mustache/vim-mustache-handlebars'
+    Plug 'dracula/vim'
 
     " Visual stuff
     Plug 'vim-airline/vim-airline'
     Plug 'Yggdroot/indentLine'
-    "Plug 'nathanaelkane/vim-indent-guides'
-
-    "Plug 'donRaphaco/neotex', { 'for': 'tex' }) " Live LaTeX preview
 
 " Initialize plugin system
 call plug#end()
@@ -55,10 +56,37 @@ set scrolloff=2     " keep 2 lines visible while scrolling
 set ignorecase smartcase       " if search pattern is all lowercase, find all matches.
                                " if pattern contains upperase, find only matches with
                                " uppercase
+                               "
+
+set title
+set autoread " detect when a file is changed
+
+set nolazyredraw " don't redraw while executing macros
+
+set showmatch " show matching braces
+
+set smartindent
+
+
+" Triger `autoread` when files changes on disk
+" https://unix.stackexchange.com/questions/149209/refresh-changed-content-of-file-opened-in-vim/383044#383044
+" https://vi.stackexchange.com/questions/13692/prevent-focusgained-autocmd-running-in-command-line-editing-mode
+" autocmd FocusGained,BufEnter,CursorHold,CursorHoldI * if mode() != 'c' | checktime | endif
+au FocusGained * :checktime
+" Notification after file change
+" https://vi.stackexchange.com/questions/13091/autocmd-event-for-autoread
+autocmd FileChangedShellPost *
+  \ echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
+
+
 
 let mapleader = ","
 
-colorscheme dracula
+color dracula
+highlight Pmenu guibg=white guifg=black gui=bold
+highlight Comment gui=bold
+highlight Normal gui=none
+highlight NonText guibg=none
 
 if (empty($TMUX))
     if (has("nvim"))
@@ -73,18 +101,10 @@ if (empty($TMUX))
     endif
 endif
 
-" Remove all trailing whitespace by pressing F5
-" nnoremap <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
-
 
 " Remove leftover highlighting
 nnoremap <silent> <Leader>n :noh<CR>
 
-
-" Open files in vertical horizontal split
-" nnoremap <silent> <Leader>v :call fzf#run({
-" \   'right': winwidth('.') / 2,
-" \   'sink':  'vertical botright split' })<CR>
 
 
 " -------- Plugin Settings ---------
@@ -104,11 +124,6 @@ let g:python_highlight_all = 1
 
 " CamelCaseMotion settings
 call camelcasemotion#CreateMotionMappings('<leader>') " use default mappings
-
-" Indent Guides settings
-" let g:indent_guides_enable_on_vim_startup = 1
-" let g:indent_guides_guide_size = 1
-" let g:indent_guides_start_level = 2
 
 " indentLine
 let g:indentLine_char = '▏'
@@ -132,17 +147,17 @@ endfunction
 nmap <leader>t :call TrimWhitespace()<CR>
 
 
+" Make default comment // instead of /* */ in C, C++
+autocmd FileType c,cpp set commentstring=//\ %s
+
+" Resize splits with arrow keys
+nnoremap <Up> :resize +5<CR>
+nnoremap <Down> :resize -5<CR>
+nnoremap <Left> :vertical resize +5<CR>
+nnoremap <Right> :vertical resize -5<CR>
 
 
 " ---------- FZF stuff ------------
-
-" function! s:find_git_root()
-"   return system('git rev-parse --show-toplevel 2> /dev/null')[:-2]
-" endfunction
-
-" command! ProjectFiles execute 'Files' s:find_git_root()
-
-" noremap <leader>f :ProjectFiles<cr>
 
 nmap <leader>f :Files<CR>
 nmap <leader>l :Rg<CR>
