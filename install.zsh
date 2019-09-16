@@ -22,6 +22,8 @@ mkdir -p $VIM_PLUG_DIR/plugged
 echo Linking .zshrc into $HOME...
 ln -s $SCRIPT_PATH/.zshrc $HOME/.zshrc
 
+echo Linking .tmux.conf into $HOME...
+ln -s $SCRIPT_PATH/tmux.conf $HOME/.tmux.conf
 
 
 
