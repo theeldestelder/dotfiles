@@ -151,8 +151,8 @@ nmap <leader>t :call TrimWhitespace()<CR>
 autocmd FileType c,cpp set commentstring=//\ %s
 
 " Resize splits with arrow keys
-nnoremap <Up> :resize +5<CR>
-nnoremap <Down> :resize -5<CR>
+" nnoremap <Up> :resize +5<CR>
+" nnoremap <Down> :resize -5<CR>
 nnoremap <Left> :vertical resize +5<CR>
 nnoremap <Right> :vertical resize -5<CR>
 
