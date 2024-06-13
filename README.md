@@ -1,6 +1,6 @@
 # Dotfiles
 
-These are my dotfiles.  They make me happier.
+These are my dotfiles.
 
 I use zsh as my shell and NeoVim as my text editor.
 
