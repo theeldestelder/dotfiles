@@ -1,0 +1,80 @@
+palette = "dracula"
+
+# Place python info first to keep venv info visible
+format = '$python$all'
+
+continuation_prompt = ">>(bold white) "
+
+[aws]
+style = "bold orange"
+
+[character]
+error_symbol = "[>](bold red)"
+success_symbol = "[>](bold green)"
+
+[cmd_duration]
+style = "bg:yellow fg:background"
+format = '[ $duration ]($style)'
+min_time = 0
+show_milliseconds = true
+
+[directory]
+style = "bg:green fg:background"
+truncate_to_repo = false
+truncation_length = 30
+format = '[ $path ]($style)[$read_only]($read_only_style)'
+
+[git_branch]
+symbol = " "
+style = "bg:pink fg:background"
+format = '[ $symbol$branch(:$remote_branch) ]($style)'
+
+[git_status]
+style = "bg:orange fg:background"
+format = '([ $ahead_behind ]($style))'
+ahead = '⇡${count}'
+diverged = '⇕⇡${ahead_count}⇣${behind_count}'
+behind = '⇣${count}'
+
+[gradle]
+disabled = true
+
+[dotnet]
+disabled = true
+
+[hostname]
+style = "bold purple"
+
+[nodejs]
+disabled = true
+
+[python]
+format = '[${symbol}(\($virtualenv\) )]($style)'
+style = "bg:orange fg:background"
+symbol = "  "
+detect_files = []
+detect_extensions = []
+
+[package]
+disabled = true
+
+[java]
+disabled = true
+
+[username]
+format = "[$user]($style) on "
+style_user = "bold cyan"
+
+# Define Dracula color palette
+[palettes.dracula]
+background = "#282a36"
+current_line = "#44475a"
+foreground = "#f8f8f2"
+comment = "#6272a4"
+cyan = "#8be9fd"
+green = "#50fa7b"
+orange = "#ffb86c"
+pink = "#ff79c6"
+purple = "#bd93f9"
+red = "#ff5555"
+yellow = "#f1fa8c"
